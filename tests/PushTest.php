@@ -24,7 +24,17 @@ class PushTest extends TestCase
     ];
 
     /**
-     * 初始化
+     * 打印消息
+     * @param $message
+     */
+    public function dump($message)
+    {
+        echo $message;
+        echo PHP_EOL;
+    }
+
+    /**
+     * 初始化驱动
      * @return mixed
      * @throws \Exception
      */
@@ -32,6 +42,7 @@ class PushTest extends TestCase
     {
         if (!empty($this->drive)) return;
         $this->drive = \JavaReact\EasyPush\core\PushFactory::getInstance($this->driveName)::init($this->config)
+            ->setSystemMessage(true)
             ->setTitle('标题')
             ->setBody('消息正文')
             ->setExtendedData(['a' => 1, 'b' => 2]);// 自定义扩展参数
@@ -43,7 +54,8 @@ class PushTest extends TestCase
     public function testSendAll()
     {
         $result = $this->drive->sendAll();
-        $result || $this->drive->getError();
+        $result || $this->dump($this->drive->getError());
+        $this->assertTrue($result);
     }
 
     /**
@@ -51,7 +63,9 @@ class PushTest extends TestCase
      */
     public function testSendAllAndroid()
     {
-        $this->drive->sendAllAndroid();
+        $result = $this->drive->sendAllAndroid();
+        $result || $this->dump($this->drive->getError());
+        $this->assertTrue($result);
     }
 
     /**
@@ -59,7 +73,9 @@ class PushTest extends TestCase
      */
     public function testsendAllIOS()
     {
-        $this->drive->sendAllIOS();
+        $result = $this->drive->sendAllIOS();
+        $result || $this->dump($this->drive->getError());
+        $this->assertTrue($result);
     }
 
     /**
@@ -67,7 +83,9 @@ class PushTest extends TestCase
      */
     public function testSendOne()
     {
-        $this->drive->sendOne('设备码');
+        $result = $this->drive->sendOne('设备码');
+        $result || $this->dump($this->drive->getError());
+        $this->assertTrue($result);
     }
 
     /**
@@ -75,7 +93,9 @@ class PushTest extends TestCase
      */
     public function testSendOneAndroid()
     {
-        $this->drive->sendOneAndroid('设备码');
+        $result = $this->drive->sendOneAndroid('设备码');
+        $result || $this->dump($this->drive->getError());
+        $this->assertTrue($result);
     }
 
     /**
@@ -83,7 +103,9 @@ class PushTest extends TestCase
      */
     public function testSendOneIOS()
     {
-        $this->drive->sendOneIOS('设备码');
+        $result = $this->drive->sendOneIOS('设备码');
+        $result || $this->dump($this->drive->getError());
+        $this->assertTrue($result);
     }
 
 }

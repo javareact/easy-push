@@ -73,7 +73,12 @@ abstract class UmengNotification
         }
     }
 
-    // Set key/value for $data array, for the keys which can be set please see $DATA_KEYS, $PAYLOAD_KEYS, $BODY_KEYS, $POLICY_KEYS
+    /**
+     * Set key/value for $data array, for the keys which can be set please see $DATA_KEYS, $PAYLOAD_KEYS, $BODY_KEYS, $POLICY_KEYS
+     * @param $key
+     * @param $value
+     * @return mixed
+     */
     abstract function setPredefinedKeyValue($key, $value);
 
     /**
@@ -109,7 +114,6 @@ abstract class UmengNotification
             $this->error .= "Http code:" . $httpCode . " details:" . $result;
             return false;
         }
-//        print($this->result);
         return true;
     }
 
