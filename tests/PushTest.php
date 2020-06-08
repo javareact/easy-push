@@ -14,8 +14,8 @@ class PushTest extends TestCase
     public $drive;
     public $config    = [
         'android' => [
-            'appKey'          => 'appKey',
-            'appMasterSecret' => 'appMasterSecret'
+            'appKey'          => '5edddbc8570df3bb7400041b',
+            'appMasterSecret' => 'xq2l6oqwhnhbf5i99quxmrijz8wlmpzq'
         ],
         'IOS'     => [
             'appKey'          => 'appKey',
@@ -28,9 +28,9 @@ class PushTest extends TestCase
      * @return mixed
      * @throws \Exception
      */
-    protected function initDrive()
+    protected function setUp(): void
     {
-        if (!empty($this->drive)) return $this->drive;
+        if (!empty($this->drive)) return;
         $this->drive = \JavaReact\EasyPush\core\PushFactory::getInstance($this->driveName)::init($this->config)
             ->setTitle('标题')
             ->setBody('消息正文')
@@ -42,7 +42,8 @@ class PushTest extends TestCase
      */
     public function testSendAll()
     {
-        $this->drive->sendAll();
+        $result = $this->drive->sendAll();
+        $result || $this->drive->getError();
     }
 
     /**

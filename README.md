@@ -21,7 +21,7 @@ PHP版本：个推PHP7以上，友盟5.3以上，如果PHP版本低可自行改�
 # 赋值你要使用哪个平台的配置，说明文档最下面为各平台的配置参考
 
 // 设置标题和消息、自定义参数
-$push = \xing\push\core\PushFactory::getInstance($driveName)::init($config)
+$push = PushFactory::getInstance($driveName)::init($config)
         ->setTitle('标题')
         ->setBody('消息正文')
         ->setExtendedData(['a' => 1, 'b' => 2]);// 自定义扩展参数

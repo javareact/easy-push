@@ -51,7 +51,6 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
      */
     public function setSdk($type = 'android')
     {
-//        if (!empty($this->sdk)) return $this->sdk;
         $this->platform = $type;
         $this->sdk      = $type == 'android' ? new AndroidNotification() : new IOSNotification();
         $this->sdk->setPredefinedKeyValue("timestamp", $this->timestamp);
@@ -98,22 +97,31 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
         return $this->sdk->send();
     }
 
-    // 发送广播
+    /**
+     * 发送广播
+     * @return mixed|void
+     */
     public function sendAll()
     {
         $this->sendAllAndroid();
         $this->sendAllIOS();
     }
 
-    // 安卓 - 广播
+    /**
+     * 安卓 - 广播
+     * @return bool|mixed
+     */
     public function sendAllAndroid()
     {
         $this->setSdk('android');
         $this->sdk->data["type"] = "broadcast";
-        $this->send();
+        return $this->send();
     }
 
-    // IOS - 广播
+    /**
+     * IOS - 广播
+     * @return mixed|void
+     */
     public function sendAllIOS()
     {
         $this->setSdk('IOS');
@@ -159,22 +167,27 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
         $this->send();
     }
 
-    // 发送组播
+    /**
+     * 发送组播
+     */
     public function sendGroup()
     {
-
     }
 
-    // 安卓 - 组播
+    /**
+     * 安卓 - 组播
+     * @return mixed|void
+     */
     public function sendGroupAndroid()
     {
-
     }
 
-    // IOS - 组播
+    /**
+     * IOS - 组播
+     * @return mixed|void
+     */
     public function sendGroupIOS()
     {
-
     }
 
     /**
@@ -188,11 +201,19 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
         return $this;
     }
 
+    /**
+     * @return mixed
+     * @inheritDoc
+     */
     public function getError()
     {
         return $this->sdk->error;
     }
 
+    /**
+     * @return mixed
+     * @inheritDoc
+     */
     public function getResult()
     {
         return $this->sdk->result;

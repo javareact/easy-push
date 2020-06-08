@@ -9,7 +9,9 @@
   ],
   "require": {
     "php": ">=7.1.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-curl": "*",
+    "ext-zlib": "*"
   },
   "require-dev": {
     "endroid/qrcode": "~1.9",

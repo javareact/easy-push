@@ -25,8 +25,7 @@ class GeTuiService extends \JavaReact\EasyPush\core\BasePush implements \JavaRea
      */
     public static function init($config)
     {
-        $class = new self();
-
+        $class               = new self();
         $class->config       = $config;
         $class->AppKey       = $config['AppKey'] ?? '';
         $class->AppID        = $config['AppID'] ?? '';
@@ -62,16 +61,22 @@ class GeTuiService extends \JavaReact\EasyPush\core\BasePush implements \JavaRea
         $this->result = $igt->pushMessageToApp($message);
     }
 
-    // 安卓 - 广播
+    /**
+     * 安卓 - 广播
+     * @return mixed|void
+     */
     public function sendAllAndroid()
     {
-        $this->sendAll();
+        return $this->sendAll();
     }
 
-    // IOS - 广播
+    /**
+     * IOS - 广播
+     * @return mixed|void
+     */
     public function sendAllIOS()
     {
-        $this->sendAll();
+        return $this->sendAll();
     }
 
     /**
@@ -85,11 +90,8 @@ class GeTuiService extends \JavaReact\EasyPush\core\BasePush implements \JavaRea
         //消息模版：
         // 4.NotyPopLoadTemplate：通知弹框下载功能模板
         $template = $this->getTemplate();
-
-
         //定义"SingleMessage"
         $message = new IGtSingleMessage();
-
         $message->set_isOffline(true);//是否离线
         $message->set_offlineExpireTime(3600 * 12 * 1000);//离线时间
         $message->set_data($template);//设置推送消息类型
@@ -99,8 +101,7 @@ class GeTuiService extends \JavaReact\EasyPush\core\BasePush implements \JavaRea
         $target->set_appId($this->AppID);
         $target->set_clientId($device);
 //    $target->set_alias(Alias);
-
-        $this->result = $igt->pushMessageToSingle($message, $target);
+        return $this->result = $igt->pushMessageToSingle($message, $target);
     }
 
     /**
@@ -109,7 +110,7 @@ class GeTuiService extends \JavaReact\EasyPush\core\BasePush implements \JavaRea
      */
     public function sendOneAndroid($device)
     {
-        $this->sendOne($device);
+        return $this->sendOne($device);
     }
 
     /**
@@ -118,7 +119,7 @@ class GeTuiService extends \JavaReact\EasyPush\core\BasePush implements \JavaRea
      */
     public function sendOneIOS($device)
     {
-        $this->sendOne($device);
+        return $this->sendOne($device);
     }
 
     // 发送组播

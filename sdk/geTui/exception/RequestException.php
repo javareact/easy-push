@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -14,6 +15,7 @@ class RequestException extends Exception
         parent::__construct($message, $e);
         $this->requestId = $requestId;
     }
+
     public function getRequestId()
     {
         return $this->requestId;
