@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
  */
 class PushTest extends TestCase
 {
+
+    public $device    = 'AitXtLWl7qd3eh2zOxjoGysPtMrcw0I7_9YwBD5w1ZGz';
     public $driveName = 'Umeng';
     public $drive;
     public $config    = [
@@ -83,7 +85,7 @@ class PushTest extends TestCase
      */
     public function testSendOne()
     {
-        $result = $this->drive->sendOne('设备码');
+        $result = $this->drive->sendOne($this->device);
         $result || $this->dump($this->drive->getError());
         $this->assertTrue($result);
     }
@@ -93,7 +95,7 @@ class PushTest extends TestCase
      */
     public function testSendOneAndroid()
     {
-        $result = $this->drive->sendOneAndroid('设备码');
+        $result = $this->drive->sendOneAndroid($this->device);
         $result || $this->dump($this->drive->getError());
         $this->assertTrue($result);
     }
@@ -103,7 +105,7 @@ class PushTest extends TestCase
      */
     public function testSendOneIOS()
     {
-        $result = $this->drive->sendOneIOS('设备码');
+        $result = $this->drive->sendOneIOS($this->device);
         $result || $this->dump($this->drive->getError());
         $this->assertTrue($result);
     }

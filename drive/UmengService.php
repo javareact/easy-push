@@ -126,7 +126,7 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
     {
         $this->setSdk('IOS');
         $this->sdk->data["type"] = "broadcast";
-        $this->send();
+        return $this->send();
     }
 
     /**
@@ -150,7 +150,7 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
         // 单播设备：设置默认为null
         $this->sdk->data['device_tokens'] = null;
         $this->sdk->setPredefinedKeyValue("device_tokens", $device);
-        $this->send();
+        return $this->send();
     }
 
     /**
@@ -164,7 +164,7 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
         // 单播设备：设置默认为null
         $this->sdk->data['device_tokens'] = null;
         $this->sdk->setPredefinedKeyValue("device_tokens", $device);
-        $this->send();
+        return $this->send();
     }
 
     /**
@@ -192,10 +192,10 @@ class UmengService extends \JavaReact\EasyPush\core\BasePush implements PushInte
 
     /**
      * 设置是否发送系统通知（非透传）
-     * @param $bool
+     * @param bool $bool
      * @return $this
      */
-    public function setSystemMessage($bool)
+    public function setSystemMessage(bool $bool)
     {
         $this->systemMessage = $bool;
         return $this;

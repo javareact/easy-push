@@ -55,7 +55,7 @@ class BasePush
      * @param $bool
      * @return $this
      */
-    public function setSystemMessage($bool)
+    public function setSystemMessage(bool $bool)
     {
         $this->systemMessage = $bool;
         return $this;

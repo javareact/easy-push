@@ -4,16 +4,28 @@ namespace JavaReact\EasyPush\sdk\uMeng\notification;
 
 abstract class UmengNotification
 {
-    // The host
+    /**
+     * The host
+     * @var string
+     */
     protected $host = "http://msg.umeng.com";
 
-    // The upload path
+    /**
+     * The upload path
+     * @var string
+     */
     protected $uploadPath = "/upload";
 
-    // The post path
+    /**
+     * The post path
+     * @var string
+     */
     protected $postPath = "/api/send";
 
-    // The app master secret
+    /**
+     * The app master secret
+     * @var null
+     */
     protected $appMasterSecret = NULL;
 
     public $result;
@@ -53,7 +65,11 @@ abstract class UmengNotification
         $this->appMasterSecret = $secret;
     }
 
-    //return TRUE if it's complete, otherwise throw exception with details
+    /**
+     * return TRUE if it's complete, otherwise throw exception with details
+     * @return bool
+     * @throws \Exception
+     */
     function isComplete()
     {
         if (is_null($this->appMasterSecret))
