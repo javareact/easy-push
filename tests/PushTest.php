@@ -2,7 +2,6 @@
 
 namespace Test\EasyPay;
 
-use JavaReact\EasyPush\core\PushFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -11,9 +10,9 @@ use PHPUnit\Framework\TestCase;
  */
 class PushTest extends TestCase
 {
-    public  $driveName     = 'Umeng';
-    public  $drive;
-    public  $config        = [
+    public $driveName = 'Umeng';
+    public $drive;
+    public $config    = [
         'android' => [
             'appKey'          => 'appKey',
             'appMasterSecret' => 'appMasterSecret'
@@ -23,101 +22,67 @@ class PushTest extends TestCase
             'appMasterSecret' => 'appMasterSecret'
         ]
     ];
-    public $title         = '标题';
-    public $body          = '消息正文';
-    public $systemMessage = '设备码';
-    public $extendedData  = ['a' => 1, 'b' => 2];
 
+    /**
+     * 初始化
+     * @return mixed
+     * @throws \Exception
+     */
     protected function initDrive()
     {
         if (!empty($this->drive)) return $this->drive;
-        $this->drive                = PushFactory::getInstance($this->driveName)::init($this->config);
-        $this->drive->title         = $this->title;
-        $this->drive->body          = $this->body;
-        $this->drive->systemMessage = $this->systemMessage;
-        $this->drive->extendedData  = $this->extendedData;
+        $this->drive = \JavaReact\EasyPush\core\PushFactory::getInstance($this->driveName)::init($this->config)
+            ->setTitle('标题')
+            ->setBody('消息正文')
+            ->setExtendedData(['a' => 1, 'b' => 2]);// 自定义扩展参数
     }
 
-    // 发送广播
+    /**
+     * 广播：所有平台
+     */
     public function testSendAll()
     {
-        $this->initDrive();
-        $this->testSendAllAndroid();
-        $this->testSendAllIOS();
+        $this->drive->sendAll();
     }
 
-    // 安卓 - 广播
+    /**
+     * 广播：安卓
+     */
     public function testSendAllAndroid()
     {
-        $this->initDrive();
-        return $this->drive->sendAllAndroid();
+        $this->drive->sendAllAndroid();
     }
 
-    // IOS - 广播
-    public function testSendAllIOS()
+    /**
+     * 广播：IOS
+     */
+    public function testsendAllIOS()
     {
-        $this->initDrive();
-        return $this->drive->sendAllIOS();
+        $this->drive->sendAllIOS();
     }
 
     /**
      * 单播：所有平台
-     * @param string $device
      */
-    public function testSendOne($device)
+    public function testSendOne()
     {
-        $this->initDrive();
-        return $this->drive->sendOne($device);
+        $this->drive->sendOne('设备码');
     }
 
     /**
-     * 安卓 - 单播
-     * @param string $device 发送设备
+     * 单播：安卓
      */
-    public function testSendOneAndroid($device)
+    public function testSendOneAndroid()
     {
-        $this->initDrive();
-        return $this->drive->sendOneAndroid($device);
+        $this->drive->sendOneAndroid('设备码');
     }
 
     /**
-     * IOS - 单播
-     * @param string $device 发送设备
+     * 单播：IOS
      */
-    public function testSendOneIOS($device)
+    public function testSendOneIOS()
     {
-        $this->initDrive();
-        return $this->drive->sendOneIOS($device);
+        $this->drive->sendOneIOS('设备码');
     }
 
-    // 发送组播
-    public function testSendGroup()
-    {
-        $this->initDrive();
-        return $this->drive->sendGroup();
-    }
-
-    // 安卓 - 组播
-    public function testSendGroupAndroid()
-    {
-        $this->initDrive();
-        return $this->drive->sendGroupAndroid();
-    }
-
-    // IOS - 组播
-    public function testSendGroupIOS()
-    {
-        $this->initDrive();
-        return $this->drive->sendGroupIOS();
-    }
-
-    public function getError()
-    {
-        return $this->drive->getError();
-    }
-
-    public function getResult()
-    {
-        return $this->drive->getResult();
-    }
 }
